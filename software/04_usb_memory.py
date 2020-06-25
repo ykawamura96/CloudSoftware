@@ -16,6 +16,7 @@ def randomname(n):
 
 def write_file(fname, size):
     s = randomname(size)
+    print(s)
     with open(fname, 'wb') as f:
         f.write(s)
 
@@ -42,7 +43,7 @@ def mesure_time(fname, size, n_trial):
 
 def save_time(max_size, n_trial, step=10):
     fname = '/tmp/tmp.txt'
-    fname = '/media/y-kawamura/UBUNTU\ 18_0/tmp.txt'
+    fname = '/media/y-kawamura/USB_MEMORY/tmp.txt'
     averages = []
     stds = []
     x = np.arange(0, max_size, step)
@@ -66,5 +67,5 @@ def save_time(max_size, n_trial, step=10):
 if __name__ == '__main__':
    start = time.time()
    print("start")
-   save_time(max_size=10000, n_trial=10, step=100)
+   save_time(max_size=500, n_trial=5, step=100)
    print("finished, total time: {}".format(time.time() - start))

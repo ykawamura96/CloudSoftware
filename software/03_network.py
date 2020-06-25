@@ -1,7 +1,3 @@
-import time
-import numpy as np
-import pickle
-from datetime import datetime
 from collections import namedtuple
 
 MeasuredData = namedtuple('MeasuredData',
@@ -9,4 +5,4 @@ MeasuredData = namedtuple('MeasuredData',
 
 
 if __name__ == "__main__":
-    
+    "curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
