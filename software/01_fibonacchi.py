@@ -31,7 +31,6 @@ def save_time(max_fib, n_trial, step=10):
     averages = []
     stds = []
     x = np.arange(0, max_fib, step)
-    fig = plt.figure()
     for i in range(0, max_fib, step):
         elapsed = mesure_time(n_fib=i, n_trial=n_trial)
         averages.append(np.average(elapsed))
@@ -39,7 +38,7 @@ def save_time(max_fib, n_trial, step=10):
     averages = np.array(averages)
     stds = np.array(stds)
     now = datetime.now()
-    m = MeasuredData('Linux', 'fibonacci', x, [averages, stds], 'time', 'fibonacci(n)')
+    m = MeasuredData('VirtualBox', 'fibonacci', x, [averages, stds], 'time', 'fibonacci(n)')
     fname = "{}-{}-{}{}{}{}{}".format(m.os, m.title, now.year, now.month, now.day, now.hour, now.minute)
     with open('resources/{}.pkl'.format(fname), 'wb') as f:
         pickle.dump(m , f)

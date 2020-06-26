@@ -56,7 +56,7 @@ def save_time(max_size, n_trial, step=10):
     plt.fill_between(x, averages-stds, averages+stds, alpha=0.5)
     plt.show()
     now = datetime.now()
-    m = MeasuredData('Linux', 'IO', x, [averages, stds], 'time', 'size of file')
+    m = MeasuredData('VirtualBox', 'IO', x, [averages, stds], 'time', 'size of file')
     fname = '{}-{}-{}{}{}{}{}'.format(m.os, m.title, now.year, now.month, now.day, now.hour, now.minute)
     with open('resources/{}.pkl'.format(fname), 'wb') as f:
         pickle.dump(m , f)
