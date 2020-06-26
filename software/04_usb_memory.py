@@ -16,7 +16,6 @@ def randomname(n):
 
 def write_file(fname, size):
     s = randomname(size)
-    print(s)
     with open(fname, 'wb') as f:
         f.write(s)
 
@@ -58,7 +57,7 @@ def save_time(max_size, n_trial, step=10):
     plt.fill_between(x, averages-stds, averages+stds, alpha=0.5)
     plt.show()
     now = datetime.now()
-    m = MeasuredData('Linux', 'USB_IO', x, [averages, stds], 'time', 'size of file')
+    m = MeasuredData('Linux', 'USB_IO', x, [averages, stds],'size of file', 'time')
     fname = '{}-{}-{}{}{}{}{}'.format(m.os, m.title, now.year, now.month, now.day, now.hour, now.minute)
     with open('resources/{}.pkl'.format(fname), 'wb') as f:
         pickle.dump(m , f)
