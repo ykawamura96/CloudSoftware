@@ -1,3 +1,4 @@
+import argparse
 import time
 import numpy as np
 import pickle
@@ -27,7 +28,7 @@ def mesure_time(n_fib, n_trial):
         elapsed.append(time.time() - before)
     return elapsed
 
-def save_time(max_fib, n_trial, step=10):
+def save_time(max_fib, n_trial, step=10, hosttype='Linux'):
     averages = []
     stds = []
     x = np.arange(0, max_fib, step)
@@ -35,13 +36,21 @@ def save_time(max_fib, n_trial, step=10):
         elapsed = mesure_time(n_fib=i, n_trial=n_trial)
         averages.append(np.average(elapsed))
         stds.append(np.std(elapsed))
+        # print('fib: {}, elapsed {}'.format(i, np.average(elapsed)))
     averages = np.array(averages)
     stds = np.array(stds)
     now = datetime.now()
-    m = MeasuredData('VirtualBox', 'fibonacci', x, [averages, stds], 'time', 'fibonacci(n)')
-    fname = "{}-{}-{}{}{}{}{}".format(m.os, m.title, now.year, now.month, now.day, now.hour, now.minute)
+    m = MeasuredData(hosttype, 'fibonacci', x, [averages, stds], 'fibonacci(n)', 'time')
+
+    fname = '{}-{}-{}{}{}{}{}'.format(m.os, m.title, now.year, now.month, now.day, now.hour, now.minute)
     with open('resources/{}.pkl'.format(fname), 'wb') as f:
         pickle.dump(m , f)
     
-if __name__ == "__main__":
-    save_time(max_fib=1000, step=50, n_trial=10)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Plot results.')
+    parser.add_argument('-t', dest="hosttype", required=True,
+                        help='host os type', metavar='FILE')
+    args = parser.parse_args()
+    hosttype = args.hosttype
+    save_time(max_fib=10000, step=50, n_trial=100, hosttype=hosttype)
