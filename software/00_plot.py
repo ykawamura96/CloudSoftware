@@ -13,8 +13,10 @@ def plot(ms):
         x = m.x_data
         ave = m.y_data[0]
         std = m.y_data[1]
-        plt.plot(x, ave)
+        plt.plot(x, ave, label=m.os)
         plt.fill_between(x, ave-std, ave+std, alpha=0.5)
+        print(m.os)
+    plt.legend()
     plt.title(m.title)
     plt.xlabel(m.x_label)
     plt.ylabel(m.y_label)
