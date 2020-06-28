@@ -23,6 +23,7 @@ def write_file(fname, size):
 def read_file(fname):
     with open(fname, 'r') as f:
        s = f.read()
+       a = len(s)
         
 
 def init_file(fname):
@@ -42,26 +43,28 @@ def mesure_time(fname, size, n_trial):
     return elapsed
 
 def save_time(max_size, n_trial, step=10, hosttype='Linux'):
-    fname = '/tmp/tmp.txt'
-    averages = []
-    stds = []
-    x = np.arange(0, max_size, step)
-    fig = plt.figure()
-    for i in range(0, max_size, step):
-        elapsed = mesure_time(fname, size=i, n_trial=n_trial)
-        averages.append(np.average(elapsed))
-        stds.append(np.std(elapsed))
-    averages = np.array(averages)
-    stds = np.array(stds)
-    plt.plot(x, averages)
-    plt.fill_between(x, averages-stds, averages+stds, alpha=0.5)
-    plt.show()
-    now = datetime.now()
-    m = MeasuredData(hosttype, 'IO', x, [averages, stds], 'size of file', 'time')
-
-    fname = '{}-{}-{}{}{}{}{}'.format(m.os, m.title, now.year, now.month, now.day, now.hour, now.minute)
-    with open('resources/{}.pkl'.format(fname), 'wb') as f:
-        pickle.dump(m , f)
+   start = time.time()
+   print("start")
+   fname = '/tmp/tmp.txt'
+   averages = []
+   stds = []
+   x = np.arange(0, max_size, step)
+   fig = plt.figure()
+   for i in range(0, max_size, step):
+      elapsed = mesure_time(fname, size=i, n_trial=n_trial)
+      averages.append(np.average(elapsed))
+      stds.append(np.std(elapsed))
+   print("finished, total time: {}".format(time.time() - start))
+   averages = np.array(averages)
+   stds = np.array(stds)
+   plt.plot(x, averages)
+   plt.fill_between(x, averages-stds, averages+stds, alpha=0.5)
+   # plt.show()
+   now = datetime.now()
+   m = MeasuredData(hosttype, 'IO', x, [averages, stds], 'size of file', 'time')
+   fname = '{}-{}-{}{}{}{}{}'.format(m.os, m.title, now.year, now.month, now.day, now.hour, now.minute)
+   with open('resources/{}.pkl'.format(fname), 'wb') as f:
+      pickle.dump(m , f)
     
 
 if __name__ == '__main__':
@@ -69,11 +72,5 @@ if __name__ == '__main__':
    parser.add_argument("-t", dest="hosttype", required=True,
                        help="host os type", metavar="FILE")
    args = parser.parse_args()
-   hosttype = args.hosttype
-   
-   start = time.time()
-
-   start = time.time()
-   print("start")
+   hosttype = args.hosttype   
    save_time(max_size=10000, n_trial=10, step=100, hosttype=hosttype)
-   print("finished, total time: {}".format(time.time() - start))

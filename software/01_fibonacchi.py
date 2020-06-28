@@ -25,7 +25,8 @@ def mesure_time(n_fib, n_trial):
     for i in range (n_trial):
         before = time.time()
         fibonacci(n_fib)
-        elapsed.append(time.time() - before)
+        after = time.time()
+        elapsed.append(aftere - before)
     return elapsed
 
 def save_time(max_fib, n_trial, step=10, hosttype='Linux'):
