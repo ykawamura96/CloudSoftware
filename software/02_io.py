@@ -49,7 +49,7 @@ def save_time(max_size, n_trial, step=10, hosttype='Linux'):
    averages = []
    stds = []
    x = np.arange(0, max_size, step)
-   fig = plt.figure()
+   # fig = plt.figure()
    for i in range(0, max_size, step):
       elapsed = mesure_time(fname, size=i, n_trial=n_trial)
       averages.append(np.average(elapsed))
@@ -57,8 +57,8 @@ def save_time(max_size, n_trial, step=10, hosttype='Linux'):
    print("finished, total time: {}".format(time.time() - start))
    averages = np.array(averages)
    stds = np.array(stds)
-   plt.plot(x, averages)
-   plt.fill_between(x, averages-stds, averages+stds, alpha=0.5)
+   # plt.plot(x, averages)
+   # plt.fill_between(x, averages-stds, averages+stds, alpha=0.5)
    # plt.show()
    now = datetime.now()
    m = MeasuredData(hosttype, 'IO', x, [averages, stds], 'size of file', 'time')
