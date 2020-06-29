@@ -97,7 +97,7 @@
 
 %% \renewcommand\figurename{Fig.}
 %% \renewcommand\tablename{Table}
-%% \newcommand{\figref}[1]{Fig.\ref{figure:#1}}
-%% \newcommand{\tabref}[1]{Table \ref{table:#1}}
-%% \newcommand{\secref}[1]{第\ref{section:#1}節}
+\newcommand{\figref}[1]{図.\ref{figure:#1}}
+\newcommand{\tabref}[1]{Table \ref{table:#1}}
+\newcommand{\secref}[1]{第\ref{section:#1}節}
 

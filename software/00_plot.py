@@ -13,15 +13,18 @@ def plot(ms):
         x = m.x_data
         ave = m.y_data[0]
         std = m.y_data[1]
-        plt.plot(x, ave, label=m.os)
-        plt.fill_between(x, ave-std, ave+std, alpha=0.5)
+        if "hyp" in m.os:
+            plt.plot(x, ave*1000, label="virtualbox_4cpu")
+        else:
+            plt.plot(x, ave*1000, label=m.os)
+        plt.fill_between(x, (ave-std)*1000, (ave+std)*1000, alpha=0.4)
         print(m.os)
     plt.legend()
     plt.title(m.title)
-    plt.xlabel(m.x_label)
-    plt.ylabel(m.y_label)
+    plt.xlabel("size of file [bytes]")
+    plt.ylabel("time [ms]")
+    plt.ylim(0, 10)
     # plt.show()
-
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Plot results.')
