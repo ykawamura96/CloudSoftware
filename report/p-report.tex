@@ -63,7 +63,7 @@
 \begin {itemize}
 \item フィボナッチ数を求める処理.\\ 漸化式$F_{n+2} = F_{n+1} + F_{n}$を用いて繰り返しで$F(n)$を求める$O(n)$の計算．同様の計算は10回行い平均と分散を求めた．
 \item ローカルディスクにあるファイルへのread/write処理．\\ランダムな$N$文字をファイルに書き込み，その後書き込んだ文字を読み出す処理．同様の計算は10回行い平均と分散を求めた．
-\item OpenGLのbench mark (glmark2 \cite{glmark2})
+%% \item OpenGLのbench mark (glmark2 \cite{glmark2}) 
 \end {itemize}
 
 上２つの実験では，以下の条件で比較を行った．
@@ -117,84 +117,84 @@
   \end{center}
 \end{figure}
 
-\subsection{OpenGL}
-glmark2を実行した結果以下のようになった．
-\begin{table}[H]
-  \begin{tabular}{c|c} \hline
-    仮想化なし & 仮想化あり \\ \hline
-    1149  & Segmentation Faultで完遂できず \\ \hline
-  \end{tabular}
-\end{table}
-glmark2がvirtual boxで実行できない問題は，割り当てるビデオメモリをチューニングしたり，ビデオデバイスを変更するなど対策をしたものの治せず，今回のレポートには間に合わなかった．
+%% \subsection{OpenGL}
+%% glmark2を実行した結果以下のようになった．
+%% \begin{table}[H]
+%%   \begin{tabular}{c|c} \hline
+%%     仮想化なし & 仮想化あり \\ \hline
+%%     1149  & Segmentation Faultで完遂できず \\ \hline
+%%   \end{tabular}
+%% \end{table}
+%% glmark2がvirtual boxで実行できない問題は，割り当てるビデオメモリをチューニングしたり，ビデオデバイスを変更するなど対策をしたものの治せず，今回のレポートには間に合わなかった．
 
-ベンチマークの結果を以下に示す．
+%% ベンチマークの結果を以下に示す．
 
-\subsubsection{仮想化なし}
-\lstset{
-  basicstyle={\ttfamily},
-  identifierstyle={\small},
-  commentstyle={\smallitshape},
-  keywordstyle={\small\bfseries},
-  ndkeywordstyle={\small},
-  stringstyle={\small\ttfamily},
-  frame={tb},
-  breaklines=true,
-  columns=[l]{fullflexible},
-  %% numbers=left,
-  xrightmargin=0zw,
-  xleftmargin=3zw,
-  numberstyle={\scriptsize},
-  stepnumber=1,
-  numbersep=1zw,
-  lineskip=-0.5ex}
-\begin{lstlisting}[language=c]
+%% \subsubsection{仮想化なし}
+%% \lstset{
+%%   basicstyle={\ttfamily},
+%%   identifierstyle={\small},
+%%   commentstyle={\smallitshape},
+%%   keywordstyle={\small\bfseries},
+%%   ndkeywordstyle={\small},
+%%   stringstyle={\small\ttfamily},
+%%   frame={tb},
+%%   breaklines=true,
+%%   columns=[l]{fullflexible},
+%%   %% numbers=left,
+%%   xrightmargin=0zw,
+%%   xleftmargin=3zw,
+%%   numberstyle={\scriptsize},
+%%   stepnumber=1,
+%%   numbersep=1zw,
+%%   lineskip=-0.5ex}
+%% \begin{lstlisting}[language=c]
 
-  $ glmark2
-  =======================================================
-  glmark2 2014.03+git20150611.fa71af2d
-  =======================================================
-  OpenGL Information
-  GL_VENDOR:     NVIDIA Corporation
-  GL_RENDERER:   Quadro P500/PCIe/SSE2
-  GL_VERSION:    4.6.0 NVIDIA 440.100
-  =======================================================
-  [build] use-vbo=false: FPS: 988 FrameTime: 1.012 ms
-  [build] use-vbo=true: FPS: 1481 FrameTime: 0.675 ms
-  [texture] texture-filter=nearest: FPS: 1419 FrameTime: 0.705 ms
-  [texture] texture-filter=linear: FPS: 1484 FrameTime: 0.674 ms
-  [texture] texture-filter=mipmap: FPS: 1580 FrameTime: 0.633 ms
-  [shading] shading=gouraud: FPS: 978 FrameTime: 1.022 ms
-  [shading] shading=blinn-phong-inf: FPS: 980 FrameTime: 1.020 ms
-  [shading] shading=phong: FPS: 920 FrameTime: 1.087 ms
-  [shading] shading=cel: FPS: 1110 FrameTime: 0.901 ms
-  [bump] bump-render=high-poly: FPS: 764 FrameTime: 1.309 ms
-  [bump] bump-render=normals: FPS: 1479 FrameTime: 0.676 ms
-  [bump] bump-render=height: FPS: 1703 FrameTime: 0.587 ms
-  [effect2d] kernel=0,1,0;1,-4,1;0,1,0;: FPS: 1384 FrameTime: 0.723 ms
-  [effect2d] kernel=1,1,1,1,1;1,1,1,1,1;1,1,1,1,1;: FPS: 980 FrameTime: 1.020 ms
-  [pulsar] light=false:quads=5:texture=false: FPS: 1496 FrameTime: 0.668 ms
-  [desktop] blur-radius=5:effect=blur:passes=1:separable=true:windows=4: FPS: 695 FrameTime: 1.439 ms
-  [desktop] effect=shadow:windows=4: FPS: 858 FrameTime: 1.166 ms
-  [buffer] columns=200:interleave=false:update-dispersion=0.9:update-fraction=0.5:update-method=map: FPS: 425 FrameTime: 2.353 ms
-  [buffer] columns=200:interleave=false:update-dispersion=0.9:update-fraction=0.5:update-method=subdata: FPS: 627 FrameTime: 1.595 ms
-  [buffer] columns=200:interleave=true:update-dispersion=0.9:update-fraction=0.5:update-method=map: FPS: 570 FrameTime: 1.754 ms
-  [ideas] speed=duration: FPS: 1643 FrameTime: 0.609 ms
-  [jellyfish] <default>: FPS: 783 FrameTime: 1.277 ms
-  [terrain] <default>: FPS: 106 FrameTime: 9.434 ms
-  [shadow] <default>: FPS: 1037 FrameTime: 0.964 ms
-  [refract] <default>: FPS: 145 FrameTime: 6.897 ms
-  [conditionals] fragment-steps=0:vertex-steps=0: FPS: 1522 FrameTime: 0.657 ms
-  [conditionals] fragment-steps=5:vertex-steps=0: FPS: 1548 FrameTime: 0.646 ms
-  [conditionals] fragment-steps=0:vertex-steps=5: FPS: 1619 FrameTime: 0.618 ms
-  [function] fragment-complexity=low:fragment-steps=5: FPS: 1585 FrameTime: 0.631 ms
-  [function] fragment-complexity=medium:fragment-steps=5: FPS: 1375 FrameTime: 0.727 ms
-  [loop] fragment-loop=false:fragment-steps=5:vertex-steps=5: FPS: 1545 FrameTime: 0.647 ms
-  [loop] fragment-steps=5:fragment-uniform=false:vertex-steps=5: FPS: 1595 FrameTime: 0.627 ms
-  [loop] fragment-steps=5:fragment-uniform=true:vertex-steps=5: FPS: 1513 FrameTime: 0.661 ms
-  =======================================================
-  glmark2 Score: 1149
-  =======================================================
-\end{lstlisting}\label{figure:gl_linux}
+%%   $ glmark2
+%%   =======================================================
+%%   glmark2 2014.03+git20150611.fa71af2d
+%%   =======================================================
+%%   OpenGL Information
+%%   GL_VENDOR:     NVIDIA Corporation
+%%   GL_RENDERER:   Quadro P500/PCIe/SSE2
+%%   GL_VERSION:    4.6.0 NVIDIA 440.100
+%%   =======================================================
+%%   [build] use-vbo=false: FPS: 988 FrameTime: 1.012 ms
+%%   [build] use-vbo=true: FPS: 1481 FrameTime: 0.675 ms
+%%   [texture] texture-filter=nearest: FPS: 1419 FrameTime: 0.705 ms
+%%   [texture] texture-filter=linear: FPS: 1484 FrameTime: 0.674 ms
+%%   [texture] texture-filter=mipmap: FPS: 1580 FrameTime: 0.633 ms
+%%   [shading] shading=gouraud: FPS: 978 FrameTime: 1.022 ms
+%%   [shading] shading=blinn-phong-inf: FPS: 980 FrameTime: 1.020 ms
+%%   [shading] shading=phong: FPS: 920 FrameTime: 1.087 ms
+%%   [shading] shading=cel: FPS: 1110 FrameTime: 0.901 ms
+%%   [bump] bump-render=high-poly: FPS: 764 FrameTime: 1.309 ms
+%%   [bump] bump-render=normals: FPS: 1479 FrameTime: 0.676 ms
+%%   [bump] bump-render=height: FPS: 1703 FrameTime: 0.587 ms
+%%   [effect2d] kernel=0,1,0;1,-4,1;0,1,0;: FPS: 1384 FrameTime: 0.723 ms
+%%   [effect2d] kernel=1,1,1,1,1;1,1,1,1,1;1,1,1,1,1;: FPS: 980 FrameTime: 1.020 ms
+%%   [pulsar] light=false:quads=5:texture=false: FPS: 1496 FrameTime: 0.668 ms
+%%   [desktop] blur-radius=5:effect=blur:passes=1:separable=true:windows=4: FPS: 695 FrameTime: 1.439 ms
+%%   [desktop] effect=shadow:windows=4: FPS: 858 FrameTime: 1.166 ms
+%%   [buffer] columns=200:interleave=false:update-dispersion=0.9:update-fraction=0.5:update-method=map: FPS: 425 FrameTime: 2.353 ms
+%%   [buffer] columns=200:interleave=false:update-dispersion=0.9:update-fraction=0.5:update-method=subdata: FPS: 627 FrameTime: 1.595 ms
+%%   [buffer] columns=200:interleave=true:update-dispersion=0.9:update-fraction=0.5:update-method=map: FPS: 570 FrameTime: 1.754 ms
+%%   [ideas] speed=duration: FPS: 1643 FrameTime: 0.609 ms
+%%   [jellyfish] <default>: FPS: 783 FrameTime: 1.277 ms
+%%   [terrain] <default>: FPS: 106 FrameTime: 9.434 ms
+%%   [shadow] <default>: FPS: 1037 FrameTime: 0.964 ms
+%%   [refract] <default>: FPS: 145 FrameTime: 6.897 ms
+%%   [conditionals] fragment-steps=0:vertex-steps=0: FPS: 1522 FrameTime: 0.657 ms
+%%   [conditionals] fragment-steps=5:vertex-steps=0: FPS: 1548 FrameTime: 0.646 ms
+%%   [conditionals] fragment-steps=0:vertex-steps=5: FPS: 1619 FrameTime: 0.618 ms
+%%   [function] fragment-complexity=low:fragment-steps=5: FPS: 1585 FrameTime: 0.631 ms
+%%   [function] fragment-complexity=medium:fragment-steps=5: FPS: 1375 FrameTime: 0.727 ms
+%%   [loop] fragment-loop=false:fragment-steps=5:vertex-steps=5: FPS: 1545 FrameTime: 0.647 ms
+%%   [loop] fragment-steps=5:fragment-uniform=false:vertex-steps=5: FPS: 1595 FrameTime: 0.627 ms
+%%   [loop] fragment-steps=5:fragment-uniform=true:vertex-steps=5: FPS: 1513 FrameTime: 0.661 ms
+%%   =======================================================
+%%   glmark2 Score: 1149
+%%   =======================================================
+%% \end{lstlisting}\label{figure:gl_linux}
 
 \section{考察}
 \subsection{仮想マシンに割り当てるCPUの数と処理時間の関係}
@@ -221,8 +221,8 @@ glmark2がvirtual boxで実行できない問題は，割り当てるビデオ�
 \figref{fib_acc}, \figref{io_acc}からHyper-Vは性能向上に大きく寄与していることが分かる。Hyper-Vなしに比べて、CPU処理では概ね2倍、I/Oでは概ね3倍程度高速になっていて、BareMetalに遜色ない性能の発揮に寄与していることがわかる。
 このことから、実用上Hyper-Vを有効にすることは、快適な仮想マシンライフを送る上で必要不可欠な機能であると言える。
 
-\subsection{OpenGLのベンチマークについて}
-仮想マシンだとSegmentation Faultで完走できなかった。もう少し調べて弄ると直せるのかもしれないが、描画を伴う処理（やGPUでの計算）は仮想マシンで行おうとすると面倒な場合もあることがわかった。
+%% \subsection{OpenGLのベンチマークについて}
+%% 仮想マシンだとSegmentation Faultで完走できなかった。もう少し調べて弄ると直せるのかもしれないが、描画を伴う処理（やGPUでの計算）は仮想マシンで行おうとすると面倒な場合もあることがわかった。
 
 
 \section{感想}
