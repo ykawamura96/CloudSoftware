@@ -96,7 +96,7 @@ function main() {
     var data = [trace1, trace2];
 
     var layout = {
-        title: 'Scroll and Zoom',
+        title: '',
         showlegend: true,
         grid: {rows: 1, columns: 2, pattern: 'independent'},
     };
